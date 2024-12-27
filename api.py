@@ -1,10 +1,21 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import uvicorn
 from sections import sections  # Import sections from the new file
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods
+    allow_headers=["*"],  # Allow all headers
+)
+
 class Section(BaseModel):
     id: str
     title: str
